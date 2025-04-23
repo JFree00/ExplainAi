@@ -25,15 +25,16 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          text/plain:
             schema:
               type: string
       responses:
         200:
           description: Sends the input to the AI and streams the response
           content:
-            application/json:
-              schema:
+            text/plain:
+                schema:
+                  type: string
 
 
   
