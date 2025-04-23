@@ -10,14 +10,30 @@ paths:
     get:
       summary: Get hello message
       description: Returns a simple hello message text
-      operationId: getHello
+      operationId: Index
       responses:
-        '200':
+        200:
           description: Successful response
           content:
             text/plain:
               schema:
                 type: string
+  /chat:
+    post:
+      description: New endpoint
+      operationId: Chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        200:
+          description: Sends the input to the AI and streams the response
+          content:
+            application/json:
+              schema:
 
 
   
