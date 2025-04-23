@@ -1,6 +1,5 @@
 import { generateContent } from "../index";
 import { describe, expect, it } from "bun:test";
-import * as console from "node:console";
 
 const TIMEOUT = 30000; // 30 seconds to allow the model to think
 
