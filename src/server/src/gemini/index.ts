@@ -12,6 +12,17 @@ export const geminiConfig = {
     "opinions. Stick strictly to describing or explaining what is present in the text or image. Do not offer any other" +
     " assistance",
 };
+
+async function cacheContent(content: string) {
+  return await gemini.caches.create({
+    model: geminiConfig.model,
+    config: {
+      contents: `${geminiConfig.prompt}\n${content}`,
+      systemInstruction: geminiConfig.systemPrompt,
+    },
+  });
+}
+
 export async function generateContent(content: string) {
   return await gemini.models.generateContentStream({
     model: geminiConfig.model,
