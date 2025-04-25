@@ -1,11 +1,17 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
+import { Chat } from "./pages/chat.tsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
     element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <Chat />,
+      },
+    ],
   },
 ]);
 
