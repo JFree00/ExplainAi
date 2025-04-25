@@ -16,7 +16,7 @@ export function ChatWindow({ messages }: Chat) {
   return (
     <section>
       <h1 className={"sr-only"}>Explain AI chat history</h1>
-      <ul className={"flex flex-col"}>{ChatUI}</ul>
+      <ul className={"flex flex-col gap-y-10"}>{ChatUI}</ul>
     </section>
   );
 }
