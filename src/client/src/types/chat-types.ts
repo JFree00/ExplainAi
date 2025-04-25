@@ -9,8 +9,8 @@ export interface ChatMessage {
 
 export interface Chat {
   messages: ChatMessage[];
+  title?: string;
 }
-
 export const mockChat: Chat = {
   messages: [
     {
@@ -18,11 +18,12 @@ export const mockChat: Chat = {
       user: Sender.User,
     },
     {
-      content: "Hello, world!",
+      content:
+        'The content is a line of JavaScript code that will print the message "hello world" to the console. It\'s a common introductory programming example used to demonstrate basic syntax and output.\n',
       user: Sender.System,
     },
     {
-      content: "Hello, world!",
+      content: "Okay!",
       user: Sender.User,
     },
   ],
