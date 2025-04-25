@@ -3,7 +3,7 @@ import { ChatWindow } from "../components/chat/chat-window.tsx";
 
 export function Chat() {
   return (
-    <div className={"px-5"}>
+    <div className={"w-6/12 mx-auto"}>
       <ChatWindow messages={mockChat.messages} />
     </div>
   );
