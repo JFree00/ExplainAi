@@ -1,5 +1,6 @@
 import { Chat, Sender } from "../../types/chat-types.ts";
 import { UserChat } from "./user-chat.tsx";
+import Markdown from "react-markdown";
 
 export function ChatWindow({ messages }: Chat) {
   const ChatUI = messages.map((message) => {
@@ -8,7 +9,9 @@ export function ChatWindow({ messages }: Chat) {
         {message.user === Sender.User ? (
           <UserChat content={message.content} />
         ) : (
-          <p>{message.content}</p>
+          <div className={"prose prose-invert text-white"}>
+            <Markdown>{message.content}</Markdown>
+          </div>
         )}
       </li>
     );
