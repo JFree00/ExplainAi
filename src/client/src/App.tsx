@@ -8,7 +8,7 @@ function App() {
     <>
       <div className={"flex"}>
         <Sidebar chats={[mockChat]} />
-        <div className={"flex flex-col"}>
+        <div className={"flex flex-col basis-full"}>
           <Header />
           <main>
             <Outlet />
