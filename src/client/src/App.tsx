@@ -1,14 +1,20 @@
 import { Header } from "./components/ui/header.tsx";
 import { Outlet } from "react-router";
+import { mockChat } from "./types/chat-types.ts";
+import { Sidebar } from "./components/sidebar/sidebar.tsx";
 
 function App() {
   return (
     <>
-      <Header />
-
-      <main>
-        <Outlet />
-      </main>
+      <div className={"flex"}>
+        <Sidebar chats={[mockChat]} />
+        <div className={"flex flex-col"}>
+          <Header />
+          <main>
+            <Outlet />
+          </main>
+        </div>
+      </div>
     </>
   );
 }
