@@ -3,8 +3,6 @@ interface UserChatProps {
 }
 export function UserChat({ content }: UserChatProps) {
   return (
-    <p className={"rounded-2xl bg-secondary p-2.5 justify-self-end"}>
-      {content}
-    </p>
+    <p className={"rounded-2xl bg-primary p-2.5 justify-self-end"}>{content}</p>
   );
 }
