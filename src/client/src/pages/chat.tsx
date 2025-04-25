@@ -1,5 +1,5 @@
-import { ChatWindow } from "../components/ui/chat-window.tsx";
 import { mockChat } from "../types/chat-types.ts";
+import { ChatWindow } from "../components/chat/chat-window.tsx";
 
 export function Chat() {
   return (
