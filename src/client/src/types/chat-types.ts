@@ -7,11 +7,11 @@ export interface ChatMessage {
   user: Sender;
 }
 
-export interface Chat {
+export interface ChatData {
   messages?: ChatMessage[];
   title?: string;
 }
-export const mockChat: Chat = {
+export const mockChat: ChatData = {
   messages: [
     {
       content: "How are ai models trained?",

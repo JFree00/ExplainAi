@@ -1,8 +1,8 @@
-import { Chat, Sender } from "../../types/chat-types.ts";
+import { ChatData, Sender } from "../../types/chat-types.ts";
 import { UserChat } from "./user-chat.tsx";
 import Markdown from "react-markdown";
 
-export function ChatWindow({ messages }: Chat) {
+export function ChatWindow({ messages }: ChatData) {
   const ChatUI = messages?.map((message) => {
     return (
       <li>
