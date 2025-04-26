@@ -1,17 +1,15 @@
-import { Chat, Sender } from "../../types/chat-types.ts";
+import { ChatData, Sender } from "../../types/chat-types.ts";
 import { UserChat } from "./user-chat.tsx";
-import Markdown from "react-markdown";
+import { SystemChat } from "./system-chat.tsx";
 
-export function ChatWindow({ messages }: Chat) {
-  const ChatUI = messages?.map((message) => {
+export function ChatWindow({ messages }: ChatData) {
+  const ChatUI = messages?.map((message, index) => {
     return (
-      <li>
+      <li key={index}>
         {message.user === Sender.User ? (
           <UserChat content={message.content} />
         ) : (
-          <div className={"prose prose-invert text-white w-full max-w-full"}>
-            <Markdown>{message.content}</Markdown>
-          </div>
+          <SystemChat content={message.content} />
         )}
       </li>
     );

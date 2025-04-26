@@ -9,6 +9,7 @@ export function Chatbar() {
       }
     >
       <textarea
+        name={"message"}
         className={
           "col-span-11 active: outline-0 w-full resize-none h-auto overflow-y-hidden box-border self-start"
         }
@@ -20,7 +21,12 @@ export function Chatbar() {
         }}
         rows={1}
       ></textarea>
-      <button className={"row-start-2 col-start-12 cursor-pointer"}>Ask</button>
+      <button
+        type={"submit"}
+        className={"row-start-2 col-start-12 cursor-pointer"}
+      >
+        Ask
+      </button>
     </div>
   );
 }
