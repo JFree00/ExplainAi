@@ -9,7 +9,7 @@ export function ChatWindow({ messages }: Chat) {
         {message.user === Sender.User ? (
           <UserChat content={message.content} />
         ) : (
-          <div className={"prose prose-invert text-white"}>
+          <div className={"prose prose-invert text-white w-full max-w-full"}>
             <Markdown>{message.content}</Markdown>
           </div>
         )}
