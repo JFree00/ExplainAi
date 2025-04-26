@@ -3,7 +3,7 @@ export enum Sender {
   System,
 }
 export interface ChatMessage {
-  content: string;
+  content: string | ReadableStream<Uint8Array>;
   user: Sender;
 }
 
