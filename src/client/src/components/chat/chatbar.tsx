@@ -5,12 +5,12 @@ export function Chatbar() {
   return (
     <div
       className={
-        "outline-1 bg-primary outline-secondary rounded-2xl mx-90 mb-20 p-2 flex items-end gap-x-5"
+        "outline-1 bg-primary outline-secondary rounded-2xl mx-90 mb-20 p-2 grid grid-cols-12 grid-rows-[1fr] gap-x-5"
       }
     >
       <textarea
         className={
-          "active: outline-0 w-full resize-none h-auto overflow-y-hidden box-border self-start"
+          "col-span-11 active: outline-0 w-full resize-none h-auto overflow-y-hidden box-border self-start"
         }
         ref={ref}
         placeholder={"Explain this..."}
@@ -20,7 +20,7 @@ export function Chatbar() {
         }}
         rows={1}
       ></textarea>
-      <button>Send</button>
+      <button className={"row-start-2 col-start-12 cursor-pointer"}>Ask</button>
     </div>
   );
 }
