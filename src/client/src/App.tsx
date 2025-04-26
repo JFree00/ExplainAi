@@ -8,9 +8,9 @@ function App() {
     <>
       <div className={"flex"}>
         <Sidebar chats={[mockChat]} />
-        <div className={"flex flex-col basis-full"}>
+        <div className={"flex flex-col basis-full content-start"}>
           <Header />
-          <main>
+          <main className={"grow basis-full"}>
             <Outlet />
           </main>
         </div>

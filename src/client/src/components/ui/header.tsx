@@ -3,10 +3,10 @@ import { SITE_NAME } from "../../../constants";
 
 export function Header() {
   return (
-    <header>
+    <header className={"h-[10vh]"}>
       <nav
         className={
-          "flex justify-between h-20 items-center font-semibold text-2xl px-5"
+          "flex justify-between h-full items-center font-semibold text-2xl px-5"
         }
       >
         <Link className={"w-20"} to={"/"}>
