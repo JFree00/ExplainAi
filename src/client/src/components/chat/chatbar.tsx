@@ -5,7 +5,7 @@ export function Chatbar() {
   return (
     <div
       className={
-        "outline-1 bg-primary outline-secondary rounded-2xl mx-90 mb-20 p-2 grid grid-cols-12 grid-rows-[1fr] gap-x-5"
+        "outline-1 bg-primary outline-secondary rounded-2xl mx-100 mb-20 p-2 grid grid-cols-12 grid-rows-[1fr] gap-x-5"
       }
     >
       <textarea
