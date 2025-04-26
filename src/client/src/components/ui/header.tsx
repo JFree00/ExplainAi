@@ -9,9 +9,7 @@ export function Header() {
           "flex justify-between h-full items-center font-semibold text-2xl px-5"
         }
       >
-        <Link className={"w-20"} to={"/"}>
-          {SITE_NAME}
-        </Link>
+        <Link to={"/"}>{SITE_NAME}</Link>
         <ul className={"flex gap-x-10"}>
           <li>
             <Link to={"/api"}>API</Link>
