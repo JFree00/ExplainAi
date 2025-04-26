@@ -13,7 +13,7 @@ export function Chat() {
         }
       >
         <div className={"w-6/12 mx-auto"}>
-          <ChatWindow />
+          <ChatWindow messages={fetcher.data?.messages} />
         </div>
       </div>
       <Chatbar />
