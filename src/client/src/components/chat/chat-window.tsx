@@ -3,7 +3,7 @@ import { UserChat } from "./user-chat.tsx";
 import Markdown from "react-markdown";
 
 export function ChatWindow({ messages }: Chat) {
-  const ChatUI = messages.map((message) => {
+  const ChatUI = messages?.map((message) => {
     return (
       <li>
         {message.user === Sender.User ? (

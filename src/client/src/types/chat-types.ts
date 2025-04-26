@@ -8,7 +8,7 @@ export interface ChatMessage {
 }
 
 export interface Chat {
-  messages: ChatMessage[];
+  messages?: ChatMessage[];
   title?: string;
 }
 export const mockChat: Chat = {
