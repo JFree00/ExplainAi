@@ -18,7 +18,7 @@ export async function generateContent(content: string) {
       Bun.env.env === "development"
         ? geminiConfig.model
         : geminiConfig.fallback,
-    contents: `${geminiConfig.prompt}\n${content}`,
+    contents: `${geminiConfig.prompt}:\n${content}`,
     config: {
       systemInstruction: geminiConfig.systemPrompt,
     },
