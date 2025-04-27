@@ -10,7 +10,7 @@ export function Sidebar({ chats }: SidebarProps) {
       <li className={""}>
         <SidebarButton to={"/"}>
           {(chat.title ?? chat.messages)
-            ? chat.messages![0].content.slice(0, 40)
+            ? (chat.messages![0].content as string).slice(0, 40)
             : "New Chat"}
         </SidebarButton>
       </li>
