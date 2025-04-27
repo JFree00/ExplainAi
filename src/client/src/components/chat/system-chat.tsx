@@ -38,7 +38,7 @@ export function SystemChat({ content }: SystemChatProps) {
           interval.current = null;
         }
       }
-    }, TYPEWRITER_DELAY);
+    }, INCREMENT_DELAY);
   };
 
   useEffect(() => {
