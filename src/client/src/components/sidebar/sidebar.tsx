@@ -2,15 +2,15 @@ import { ChatData } from "../../types/chat-types.ts";
 import { SidebarButton } from "./sidebar-button.tsx";
 
 interface SidebarProps {
-  chats: ChatData[];
+  chats?: ChatData[];
 }
 export function Sidebar({ chats }: SidebarProps) {
-  const sidebarChats = chats.map((chat) => {
+  const sidebarChats = chats?.map((chat) => {
     return (
-      <li className={""}>
+      <li>
         <SidebarButton to={"/"}>
           {(chat.title ?? chat.messages)
-            ? chat.messages![0].content.slice(0, 40)
+            ? (chat.messages![0].content as string).slice(0, 40)
             : "New Chat"}
         </SidebarButton>
       </li>
