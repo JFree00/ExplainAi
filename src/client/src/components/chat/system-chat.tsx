@@ -6,6 +6,8 @@ interface SystemChatProps {
   content: ChatMessage["content"];
 }
 
+const INCREMENT_DELAY = 25;
+
 export function SystemChat({ content }: SystemChatProps) {
   const [displayedContent, setDisplayedContent] = useState<string>("");
   const [fullResponse, setFullResponse] = useState<string>("");
