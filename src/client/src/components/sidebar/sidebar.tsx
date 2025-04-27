@@ -7,7 +7,7 @@ interface SidebarProps {
 export function Sidebar({ chats }: SidebarProps) {
   const sidebarChats = chats?.map((chat) => {
     return (
-      <li className={""}>
+      <li>
         <SidebarButton to={"/"}>
           {(chat.title ?? chat.messages)
             ? (chat.messages![0].content as string).slice(0, 40)
