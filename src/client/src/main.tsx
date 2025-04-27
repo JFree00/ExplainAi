@@ -29,7 +29,7 @@ const router = createBrowserRouter([
                 user: Sender.User,
               },
               {
-                content: await res.text(),
+                content: res.body,
                 user: Sender.System,
               },
             ],

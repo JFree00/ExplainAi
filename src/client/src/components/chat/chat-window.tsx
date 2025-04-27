@@ -7,7 +7,7 @@ export function ChatWindow({ messages }: ChatData) {
     return (
       <li key={index}>
         {message.user === Sender.User ? (
-          <UserChat content={message.content} />
+          <UserChat content={message.content as string} />
         ) : (
           <SystemChat content={message.content} />
         )}
