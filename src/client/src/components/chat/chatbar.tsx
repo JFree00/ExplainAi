@@ -1,7 +1,27 @@
-import { useRef } from "react";
+import * as React from "react";
+import { KeyboardEvent, useRef } from "react";
 
-export function Chatbar() {
+interface ChatbarProps {
+  isLoading: boolean;
+  inputValue: string;
+  onInputChange: (value: string) => void;
+}
+
+export function Chatbar({
+  inputValue,
+  isLoading,
+  onInputChange,
+}: ChatbarProps) {
   const ref = useRef<HTMLTextAreaElement>(null);
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onInputChange(event.target.value);
+  };
+  const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+    }
+  };
+
   return (
     <div
       className={
@@ -19,11 +39,16 @@ export function Chatbar() {
           ref.current!.style.height = "auto";
           ref.current!.style.height = ref.current!.scrollHeight + "px";
         }}
+        value={inputValue}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        disabled={isLoading}
         rows={1}
       ></textarea>
       <button
         type={"submit"}
         className={"row-start-2 col-start-12 cursor-pointer"}
+        disabled={isLoading || !inputValue.trim()}
       >
         Ask
       </button>
