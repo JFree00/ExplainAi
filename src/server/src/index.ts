@@ -3,9 +3,14 @@ import { generateContent } from "./gemini";
 import { streamText } from "hono/streaming";
 import { HTTPException } from "hono/http-exception";
 import { cors } from "hono/cors";
+import { auth } from "./auth";
 
 const app = new Hono();
 app.use(cors());
+app.use(async (c, next) => {
+  await auth(c);
+  await next();
+});
 
 app.get("/", (c) => {
   return c.text("Hello Hono!");
