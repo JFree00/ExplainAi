@@ -1,12 +1,12 @@
 import { sql } from "bun";
 import { Sender } from "../../types/database-types.ts";
 
-export const createChat = async (title: string, userUUID: number) => {
+export const createChat = async (title: string, userUUID: string) => {
   await sql`INSERT INTO chats (title, "user") VALUES (${title}, ${userUUID})`;
 };
 export const createChatWithMessage = async (
   title: string,
-  userUUID: number,
+  userUUID: string,
   content: string,
 ) => {
   await sql.begin(async (tx) => {
