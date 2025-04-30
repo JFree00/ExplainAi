@@ -4,7 +4,6 @@ import { streamText } from "hono/streaming";
 import { HTTPException } from "hono/http-exception";
 import { cors } from "hono/cors";
 import { auth } from "./auth";
-import { getCookie } from "hono/cookie";
 import {
   createChatWithMessage,
   selectChatById,
@@ -17,7 +16,10 @@ import {
   Sender,
 } from "./types/database-types.ts";
 
-const app = new Hono();
+type vars = {
+  user_Id: string;
+};
+const app = new Hono<{ Variables: vars }>();
 app.use(
   cors({
     origin: Bun.env.FRONTEND_URL || "http://localhost:5173",
@@ -33,7 +35,7 @@ app.get("/", (c) => {
 });
 app.get("chat/:id", async (c) => {
   const id = c.req.param("id");
-  const userId = getCookie(c, "user_Id");
+  const userId = c.get("user_Id") as string;
   if (!userId) throw new HTTPException(401, { message: "Unauthorized" });
   const chat = (await selectChatById(Number(id)))[0] as DatabaseChat;
   if (chat.user !== userId)
@@ -48,7 +50,7 @@ app.get("chat/:id", async (c) => {
 });
 app.post("/message", async (c) => {
   const input = await c.req.text();
-  const userId = getCookie(c, "user_Id");
+  const userId = c.get("user_Id") as string;
   if (!userId) throw new HTTPException(401, { message: "Unauthorized" });
   const chat = await createChatWithMessage("new chat", userId, input);
   const response = await generateContent(input);
@@ -70,7 +72,7 @@ app.post("/message", async (c) => {
 app.post("/message/:id", async (c) => {
   const id = Number(c.req.param("id"));
   const input = await c.req.text();
-  const userId = getCookie(c, "user_Id")!;
+  const userId = c.get("user_Id") as string;
   const chat = (await selectChatById(id))[0] as DatabaseChat;
   console.log(chat);
   if (chat.user !== userId)
