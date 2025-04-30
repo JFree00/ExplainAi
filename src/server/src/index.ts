@@ -47,7 +47,6 @@ app.post("/message", async (c) => {
   const input = await c.req.text();
   const userId = getCookie(c, "user_Id")!;
   const chat = await createChatWithMessage("new chat", userId, input);
-  console.log(chat);
   const response = await generateContent(input);
   let text: string;
   return streamText(
