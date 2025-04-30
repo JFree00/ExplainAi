@@ -36,7 +36,7 @@ paths:
                 type: string
   /chat:
     post:
-      summary: Create a new chat
+      summary: DEPRECATED Create a new chat
       operationId: Chat
       requestBody:
         required: true
@@ -71,6 +71,19 @@ paths:
             application/json:
               schema:
                 type: object
+  /message:
+    post:
+      summary: Sends a new message to a new chat
+      requestBody:
+        $ref: '#/components/requestBodies/chatMessage'
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+
   /message/{id}:
     post:
       summary: Sends a new message to the provided chat
