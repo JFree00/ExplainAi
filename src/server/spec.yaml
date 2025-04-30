@@ -34,7 +34,7 @@ paths:
             text/plain:
               schema:
                 type: string
-  /chat/{id}:
+  /chats/{id}:
     get:
       parameters:
         - name: id
@@ -54,7 +54,7 @@ paths:
             application/json:
               schema:
                 type: object
-  /message:
+  /chats:
     post:
       summary: Sends a new message to a new chat
       requestBody:
@@ -67,7 +67,7 @@ paths:
               schema:
                 type: object
 
-  /message/{id}:
+  /chats/{id}/messages:
     post:
       summary: Sends a new message to the provided chat
       parameters:
