@@ -21,7 +21,7 @@ export function Chat() {
       return;
     }
     const userMessage: ChatMessage = {
-      user: Sender.User,
+      sender: Sender.User,
       content: currentInput,
     };
     setDisplayedMessages((prevMessage) => [...prevMessage, userMessage]);
