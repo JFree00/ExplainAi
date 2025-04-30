@@ -12,7 +12,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <Chat />,
         action: async ({ request }) => {
-          const url = new URL("http://localhost/message");
+          const url = new URL("http://localhost/chats");
           url.port = "3000";
           const formData = await request.formData();
           const input = formData.get("message");
