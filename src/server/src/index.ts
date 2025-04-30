@@ -96,7 +96,7 @@ app.onError((error, c) => {
     // Get the custom response
     return error.getResponse();
   }
-  return c.text(error.message);
+  return c.json({ error: error.message }, 500);
 });
 
 export default app;
