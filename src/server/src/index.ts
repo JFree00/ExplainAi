@@ -18,10 +18,14 @@ import {
 } from "./types/database-types.ts";
 
 const app = new Hono();
-app.use(cors());
+app.use(
+  cors({
+    origin: Bun.env.FRONTEND_URL || "http://localhost:5173",
+    credentials: true,
+  }),
+);
 app.use(async (c, next) => {
-  await auth(c);
-  await next();
+  await auth(c, next);
 });
 
 app.get("/", (c) => {
@@ -29,7 +33,8 @@ app.get("/", (c) => {
 });
 app.get("chat/:id", async (c) => {
   const id = c.req.param("id");
-  const userId = getCookie(c, "user_Id")!;
+  const userId = getCookie(c, "user_Id");
+  if (!userId) throw new HTTPException(401, { message: "Unauthorized" });
   const chat = (await selectChatById(Number(id)))[0] as DatabaseChat;
   if (chat.user !== userId)
     throw new HTTPException(403, {
@@ -43,7 +48,8 @@ app.get("chat/:id", async (c) => {
 });
 app.post("/message", async (c) => {
   const input = await c.req.text();
-  const userId = getCookie(c, "user_Id")!;
+  const userId = getCookie(c, "user_Id");
+  if (!userId) throw new HTTPException(401, { message: "Unauthorized" });
   const chat = await createChatWithMessage("new chat", userId, input);
   const response = await generateContent(input);
   let text: string;
