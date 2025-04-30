@@ -8,9 +8,14 @@ import { getCookie } from "hono/cookie";
 import {
   createChatWithMessage,
   selectChatById,
+  selectMessagesFromChat,
 } from "./database/queries/chat.ts";
 import { sendMessage } from "./database/queries/message.ts";
-import { Sender } from "./types/database-types.ts";
+import {
+  type DatabaseChat,
+  type DatabaseMessage,
+  Sender,
+} from "./types/database-types.ts";
 
 const app = new Hono();
 app.use(cors());
@@ -22,26 +27,19 @@ app.use(async (c, next) => {
 app.get("/", (c) => {
   return c.text("Hello Hono!");
 });
-app.post("/chat", async (c) => {
-  const input = await c.req.text();
-  const response = await generateContent(input);
-  return streamText(
-    c,
-    async (stream) => {
-      for await (const chunk of response) {
-        await stream.write(chunk.text!);
-      }
-    },
-    async (error, stream) => {
-      await stream.write(error.message);
-    },
-  );
-});
 app.get("chat/:id", async (c) => {
   const id = c.req.param("id");
   const userId = getCookie(c, "user_Id")!;
-  const chat = await selectChatById(Number(id));
-  console.log(chat);
+  const chat = (await selectChatById(Number(id)))[0] as DatabaseChat;
+  if (chat.user !== userId)
+    throw new HTTPException(403, {
+      message: "You are not allowed to access this chat.",
+    });
+  const messages = (await selectMessagesFromChat(chat.id)) as DatabaseMessage[];
+  return c.json({
+    title: chat.title,
+    messages,
+  });
 });
 app.post("/message", async (c) => {
   const input = await c.req.text();
@@ -62,6 +60,27 @@ app.post("/message", async (c) => {
       await stream.write(error.message);
     },
   );
+});
+app.post("/message/:id", async (c) => {
+  const id = Number(c.req.param("id"));
+  const input = await c.req.text();
+  const userId = getCookie(c, "user_Id")!;
+  const chat = (await selectChatById(id))[0] as DatabaseChat;
+  console.log(chat);
+  if (chat.user !== userId)
+    throw new HTTPException(403, {
+      message: "You are not allowed to access this chat.",
+    });
+  await sendMessage(Sender.User, id, input);
+  const response = await generateContent(input);
+  let text: string;
+  return streamText(c, async (stream) => {
+    for await (const chunk of response) {
+      await stream.write(chunk.text!);
+      text = text ? text + chunk.text! : chunk.text!;
+    }
+    await sendMessage(Sender.System, chat.id, text);
+  });
 });
 
 app.onError((error, c) => {
