@@ -34,23 +34,6 @@ paths:
             text/plain:
               schema:
                 type: string
-  /chat:
-    post:
-      summary: DEPRECATED Create a new chat
-      operationId: Chat
-      requestBody:
-        required: true
-        content:
-          text/plain:
-            schema:
-              type: string
-      responses:
-        200:
-          description: Sends the input to the AI and streams the response
-          content:
-            text/plain:
-              schema:
-                type: string
   /chat/{id}:
     get:
       parameters:
