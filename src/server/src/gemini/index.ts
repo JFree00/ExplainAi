@@ -1,6 +1,10 @@
 import { GoogleGenAI } from "@google/genai";
 
-const gemini = new GoogleGenAI({ apiKey: Bun.env.GEMINI_API_KEY });
+export function createGeminiClient(apiKey = Bun.env.GEMINI_API_KEY) {
+  return new GoogleGenAI({ apiKey });
+}
+
+const gemini = createGeminiClient();
 export const geminiConfig = {
   model: "gemini-2.5-flash-preview-04-17",
   fallback: "gemini-2.0-flash", // also used for development
