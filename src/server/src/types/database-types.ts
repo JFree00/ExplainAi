@@ -7,9 +7,10 @@ export interface DatabaseUser {
 }
 
 export interface DatabaseChat {
-  id: string;
+  id: number;
   title: string;
   createdAt: Date;
+  user: string;
 }
 
 export interface DatabaseMessage {
@@ -18,4 +19,14 @@ export interface DatabaseMessage {
   chat_id: string;
   content: string;
   createdAt: Date;
+}
+
+export interface ChatMessage {
+  content: string | ReadableStream<Uint8Array>;
+  sender: Sender;
+}
+
+export interface ChatData {
+  messages?: ChatMessage[];
+  title?: string;
 }

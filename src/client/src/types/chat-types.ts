@@ -4,7 +4,7 @@ export enum Sender {
 }
 export interface ChatMessage {
   content: string | ReadableStream<Uint8Array>;
-  user: Sender;
+  sender: Sender;
 }
 
 export interface ChatData {
@@ -15,7 +15,7 @@ export const mockChat: ChatData = {
   messages: [
     {
       content: "How are ai models trained?",
-      user: Sender.User,
+      sender: Sender.User,
     },
     {
       content:
@@ -51,11 +51,11 @@ export const mockChat: ChatData = {
         "**7. Deployment:** Once the model is trained and evaluated to a satisfactory level, it can be deployed to make predictions or decisions on new, real-world data.\n" +
         "\n" +
         "In essence, training an AI model is an iterative optimization process where the model continuously adjusts its internal workings based on the data it is fed, with the objective of minimizing errors and becoming proficient at the task it is designed for.",
-      user: Sender.System,
+      sender: Sender.System,
     },
     {
       content: "Okay!",
-      user: Sender.User,
+      sender: Sender.User,
     },
   ],
 };

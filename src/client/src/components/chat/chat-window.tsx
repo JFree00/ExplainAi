@@ -6,7 +6,7 @@ export function ChatWindow({ messages }: ChatData) {
   const ChatUI = messages?.map((message, index) => {
     return (
       <li key={index}>
-        {message.user === Sender.User ? (
+        {message.sender === Sender.User ? (
           <UserChat content={message.content as string} />
         ) : (
           <SystemChat content={message.content} />

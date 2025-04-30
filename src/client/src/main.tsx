@@ -26,11 +26,11 @@ const router = createBrowserRouter([
             messages: [
               {
                 content: input,
-                user: Sender.User,
+                sender: Sender.User,
               },
               {
                 content: res.body,
-                user: Sender.System,
+                sender: Sender.System,
               },
             ],
           } as ChatData;
