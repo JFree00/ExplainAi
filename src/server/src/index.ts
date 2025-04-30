@@ -33,7 +33,7 @@ app.use(async (c, next) => {
 app.get("/", (c) => {
   return c.text("Hello Hono!");
 });
-app.get("chat/:id", async (c) => {
+app.get("chats/:id", async (c) => {
   const id = c.req.param("id");
   const userId = c.get("user_Id") as string;
   if (!userId) throw new HTTPException(401, { message: "Unauthorized" });
@@ -48,7 +48,7 @@ app.get("chat/:id", async (c) => {
     messages,
   });
 });
-app.post("/message", async (c) => {
+app.post("/chats", async (c) => {
   const input = await c.req.text();
   const userId = c.get("user_Id") as string;
   if (!userId) throw new HTTPException(401, { message: "Unauthorized" });
@@ -69,7 +69,7 @@ app.post("/message", async (c) => {
     },
   );
 });
-app.post("/message/:id", async (c) => {
+app.post("/chats/:id/messages", async (c) => {
   const id = Number(c.req.param("id"));
   const input = await c.req.text();
   const userId = c.get("user_Id") as string;
