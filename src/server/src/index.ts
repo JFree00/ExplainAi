@@ -75,7 +75,7 @@ app.post("/chats/:id/messages", async (c) => {
   const userId = c.get("user_Id") as string;
   const chat = (await selectChatById(id))[0] as DatabaseChat;
   console.log(chat);
-  if (chat.user !== userId)
+  if (chat?.user !== userId)
     throw new HTTPException(403, {
       message: "You are not allowed to access this chat.",
     });
