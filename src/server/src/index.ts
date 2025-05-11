@@ -33,7 +33,7 @@ app.use(async (c, next) => {
 app.get("/", (c) => {
   return c.text("Hello Hono!");
 });
-app.get("chats/:id", async (c) => {
+app.get("/chats/:id", async (c) => {
   const id = c.req.param("id");
   const userId = c.get("user_Id") as string;
   if (!userId) throw new HTTPException(401, { message: "Unauthorized" });
