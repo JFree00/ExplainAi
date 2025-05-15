@@ -1,5 +1,5 @@
 import { sql } from "bun";
-import { Sender } from "../../types/database-types.ts";
+import { type DatabaseChat, Sender } from "../../types/database-types.ts";
 
 export const createChat = async (title: string, userUUID: string) => {
   await sql`INSERT INTO chats (title, "user") VALUES (${title}, ${userUUID})`;
@@ -37,7 +37,9 @@ export const selectChatById = async (chatId: number) => {
              WHERE id = ${chatId}`;
 };
 export const selectChatsByUser = async (userUUID: string) => {
-  return sql`SELECT * FROM chats WHERE "user" = ${userUUID}`;
+  return sql`SELECT * FROM chats WHERE "user" = ${userUUID}` as Promise<
+    DatabaseChat[] | []
+  >;
 };
 export const selectMessagesFromChat = async (chatId: number) => {
   return sql`SELECT * FROM messages WHERE chat_id = ${chatId} ORDER BY created_at`;

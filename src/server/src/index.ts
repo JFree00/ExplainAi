@@ -33,7 +33,7 @@ app.use(async (c, next) => {
 app.get("/", (c) => {
   return c.text("Hello Hono!");
 });
-app.get("chats/:id", async (c) => {
+app.get("/chats/:id", async (c) => {
   const id = c.req.param("id");
   const userId = c.get("user_Id") as string;
   if (!userId) throw new HTTPException(401, { message: "Unauthorized" });
@@ -75,7 +75,7 @@ app.post("/chats/:id/messages", async (c) => {
   const userId = c.get("user_Id") as string;
   const chat = (await selectChatById(id))[0] as DatabaseChat;
   console.log(chat);
-  if (chat.user !== userId)
+  if (chat?.user !== userId)
     throw new HTTPException(403, {
       message: "You are not allowed to access this chat.",
     });
@@ -96,7 +96,7 @@ app.onError((error, c) => {
     // Get the custom response
     return error.getResponse();
   }
-  return c.text(error.message);
+  return c.json({ error: error.message }, 500);
 });
 
 export default app;
